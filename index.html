@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<dialog>
+    <form>
+        <h1>Add a Book</h1>
+        <p>
+            <label for="title">Title:</label>
+            <input type="text">
+        </p>
+        <p>
+            <label for="author">Author:</label>
+            <input type="text">
+        </p>
+        <p>
+            <label for="pages">Pages:</label>
+            <input type="number">
+        </p>
+        <p>
+            <label for="read">Read yet?:</label>
+            <input type="checkbox">
+        </p>
+        <div>
+            <button value="cancel" formmethod="dialog">Cancel</button>
+            <button id="confirmBtn" value="default">Confirm</button>
+        </div>
+    </form>
+</dialog>
+<section class="header">
+    <div class="empty"></div>
+    <div class="title">Library</div>
+    <div class="new-book">
+        <button id="new-book">New Book</button>
+    </div>
+</section>
+<section class="library" id="library">
+
+</section>
+<section class="footer">
+
+</section>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
