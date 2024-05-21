@@ -1,10 +1,6 @@
 const myLibrary = [];
 const librarySection = document.querySelector(`#library`);
-const newBook = document.querySelector(`#new-book`);
-const dialog = document.querySelector("dialog");
-const confirmBtn = document.querySelector("#confirmBtn");
-const cancelBtn = document.querySelector("#cancelBtn");
-const deleteBtn = document.querySelector("#deleteBtn")
+let liveBooks = document.querySelectorAll("#book");
 
 let title;
 let author;
@@ -19,14 +15,34 @@ function Book(title, author, pages, read){
 }
 
 function addBookToLibrary(book) {
-    book.index = myLibrary.length;
     myLibrary.push(book);
 
+}
+
+function updateLiveBooks() {
+    liveBooks = document.querySelectorAll("#book");
+    liveBooks.forEach(element => {
+        element.addEventListener(`click`, (e)=> {
+            if (e.target.id === `deleteBtn`){
+                console.log(`hi`)
+                let titleSearch = e.currentTarget.getAttribute(`title`);
+
+                let indexNum = myLibrary.map(function(e) { return e.title; }).indexOf(titleSearch);
+                console.log(myLibrary.length);
+                console.log(indexNum);
+
+                myLibrary.splice(indexNum, 1);
+
+                e.currentTarget.remove();
+            }
+        });
+    });
 }
 
 function createCard(item) {
     const displayedBook = document.createElement("div");
     displayedBook.classList.add(`book`)
+    displayedBook.setAttribute(`id`, `book`)
     const imgPlaceholder = document.createElement("div")
     imgPlaceholder.classList.add(`img`)
     const bookTitle = document.createElement("div")
@@ -40,20 +56,21 @@ function createCard(item) {
     const deleteBook = document.createElement("button")
 
     deleteBook.textContent = `X`
-    displayedBook.setAttribute(`data`, item.index)
+    deleteBook.classList.add(`deleteBtn`);
+    deleteBook.setAttribute(`id`, `deleteBtn`);
+    displayedBook.setAttribute(`title`, item.title)
     bookTitle.textContent = `Title: ${item.title}`
     bookAuthor.textContent = `By: ${item.author}`
     bookPages.textContent = `Pages: ${item.pages}`
     bookRead.textContent = `Read?: ${item.read}`
 
-    displayedBook.appendChild(deleteBook);
     librarySection.appendChild(displayedBook);
+    displayedBook.appendChild(deleteBook);
     displayedBook.appendChild(imgPlaceholder);
     displayedBook.appendChild(bookTitle);
     displayedBook.appendChild(bookAuthor);
     displayedBook.appendChild(bookPages);
     displayedBook.appendChild(bookRead);
-
 }
 
 function populateLibrary(list){
@@ -70,6 +87,15 @@ addBookToLibrary(hobbit);
 addBookToLibrary(steveJobs);
 
 populateLibrary(myLibrary);
+//DOM Stuff
+liveBooks = document.querySelectorAll("#book");
+const newBook = document.querySelector(`#new-book`);
+const dialog = document.querySelector("dialog");
+const confirmBtn = document.querySelector("#confirmBtn");
+const cancelBtn = document.querySelector("#cancelBtn");
+const deleteBtn = document.querySelector("#deleteBtn");
+
+
 
 newBook.addEventListener("click", () => {
     dialog.showModal();
@@ -90,7 +116,8 @@ confirmBtn.addEventListener("click", (e) => {
     console.table(userBook);
     addBookToLibrary(userBook);
     createCard(userBook);
-
+    updateLiveBooks();
+    liveBooks = document.querySelectorAll("#book");
     userBook = undefined;
     dialog.close();
 
@@ -102,6 +129,22 @@ cancelBtn.addEventListener("click", () => {
 })
 
 
-// deleteBtn.addEventListener("click", (e) => {
-    
-// })
+liveBooks.forEach(element => {
+    element.addEventListener(`click`, (e)=> {
+        if (e.target.id === `deleteBtn`){
+            console.log(`hi`)
+            let titleSearch = e.currentTarget.getAttribute(`title`);
+
+            let indexNum = myLibrary.map(function(e) { return e.title; }).indexOf(titleSearch);
+            console.log(myLibrary.length);
+            console.log(indexNum);
+
+            myLibrary.splice(indexNum, 1);
+
+            e.currentTarget.remove();
+
+
+            liveBooks = document.querySelectorAll("#book");
+        }
+    })
+})
