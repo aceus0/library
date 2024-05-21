@@ -25,7 +25,11 @@ section.library {
     gap: 1rem;
 }
 
-section.library>*{
+empty {
+    position: absolute;
+}
+
+section.library>div{
     display: grid;
     grid-template-rows: 1fr 4fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;

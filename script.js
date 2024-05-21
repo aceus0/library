@@ -81,8 +81,8 @@ function populateLibrary(list){
 
 
 const hobbit = new Book(`Hobbit`, `Justin`, `20`, `yes`);
-
 const steveJobs = new Book(`Steve Jobs`, `Justin`, `300`, `no`);
+
 addBookToLibrary(hobbit);
 addBookToLibrary(steveJobs);
 
@@ -117,7 +117,6 @@ confirmBtn.addEventListener("click", (e) => {
     addBookToLibrary(userBook);
     createCard(userBook);
     updateLiveBooks();
-    liveBooks = document.querySelectorAll("#book");
     userBook = undefined;
     dialog.close();
 
